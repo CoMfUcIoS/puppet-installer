@@ -13,11 +13,13 @@ var rootCmd = &cobra.Command{
 	Long: `Puppet by Perforce installer is a tool to install Puppet by Perforce products
 	example: puppet-installer install puppetserver --version 6.4.0`,
 	Run: func(cmd *cobra.Command, args []string) {
+		CheckDependencies()
 		fmt.Println("Puppet by Perforce installer")
 	},
 }
 
 func Execute() {
+	rootCmd.AddCommand(checkDependencies)
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)

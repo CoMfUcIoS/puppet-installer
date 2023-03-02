@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/comfucios/puppet-installer/utils"
+	utils "github.com/comfucios/puppet-installer/utils"
 	"github.com/spf13/cobra"
 )
 

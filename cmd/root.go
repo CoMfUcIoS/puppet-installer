@@ -25,6 +25,8 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
+	rootCmd.AddCommand(install)
+	rootCmd.AddCommand(stop)
 	rootCmd.AddCommand(start)
 	rootCmd.AddCommand(checkDependencies)
 	err := rootCmd.Execute()

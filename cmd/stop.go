@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func Start() {
+func Stop() {
 	temp_folder := "/tmp/puppet-installer"
 	compose, _ := Files.ReadFile("files/docker-compose.yaml")
 	compose_path := temp_folder + "docker-compose.yaml"
@@ -20,7 +20,7 @@ func Start() {
 		log.Fatal(err)
 	}
 
-	out, err := exec.Command("docker", "compose", "-f", compose_path, "up", "-d").Output()
+	out, err := exec.Command("docker", "compose", "-f", compose_path, "down").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,9 +28,9 @@ func Start() {
 	fmt.Println("Command Successfully Executed", string(out))
 }
 
-var start = &cobra.Command{
-	Use:   "start",
-	Short: "start",
-	Long:  `start`,
-	Run:   func(cmd *cobra.Command, args []string) { Start() },
+var stop = &cobra.Command{
+	Use:   "stop",
+	Short: "stop",
+	Long:  `stop`,
+	Run:   func(cmd *cobra.Command, args []string) { Stop() },
 }

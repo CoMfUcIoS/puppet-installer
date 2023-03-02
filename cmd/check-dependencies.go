@@ -4,13 +4,12 @@ import (
 	"log"
 	"os"
 
-	utils "github.com/comfucios/puppet-installer/utils"
 	"github.com/spf13/cobra"
 )
 
 func CheckDependencies() {
-	dockerInstalled := utils.CommandExists("docker")
-	composeInstalled := utils.CommandExists("docker-compose")
+	dockerInstalled := utils.commandExists("docker")
+	composeInstalled := utils.commandExists("docker-compose")
 
 	errMsg := "Please install "
 

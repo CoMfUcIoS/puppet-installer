@@ -1,10 +1,16 @@
 package cmd
 
 import (
+	"embed"
 	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
+)
+
+var (
+	//go:embed files/*
+	Files embed.FS
 )
 
 var rootCmd = &cobra.Command{
@@ -19,6 +25,7 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
+	rootCmd.AddCommand(start)
 	rootCmd.AddCommand(checkDependencies)
 	err := rootCmd.Execute()
 	if err != nil {

@@ -32,10 +32,6 @@ func CheckDependencies() {
 	}
 }
 
-func CommandExists(s string) {
-	panic("unimplemented")
-}
-
 var checkDependencies = &cobra.Command{
 	Use:   "check-dependencies",
 	Short: "Check dependencies",

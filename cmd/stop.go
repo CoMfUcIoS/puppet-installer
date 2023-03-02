@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -25,7 +24,7 @@ func Stop() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Command Successfully Executed", string(out))
+	log.Default().Print("Command Successfully Executed", string(out))
 }
 
 var stop = &cobra.Command{

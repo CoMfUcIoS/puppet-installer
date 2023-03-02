@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"log"
 	"os"
 
 	utils "github.com/comfucios/puppet-installer/utils"
@@ -27,7 +27,7 @@ func CheckDependencies() {
 	errMsg += " and try again"
 
 	if !dockerInstalled || !composeInstalled {
-		fmt.Println(errMsg)
+		log.Fatal(errMsg)
 		os.Exit(1)
 	}
 }

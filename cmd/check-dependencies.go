@@ -1,16 +1,21 @@
 package cmd
 
 import (
-	"fmt"
+	"log"
 	"os"
+	"os/exec"
 
-	utils "github.com/comfucios/puppet-installer/utils"
 	"github.com/spf13/cobra"
 )
 
+func CommandExists(cmd string) bool {
+	_, err := exec.LookPath(cmd)
+	return err == nil
+}
+
 func CheckDependencies() {
-	dockerInstalled := utils.CommandExists("docker")
-	composeInstalled := utils.CommandExists("docker-compose")
+	dockerInstalled := CommandExists("docker")
+	composeInstalled := CommandExists("docker-compose")
 
 	errMsg := "Please install "
 
@@ -27,7 +32,7 @@ func CheckDependencies() {
 	errMsg += " and try again"
 
 	if !dockerInstalled || !composeInstalled {
-		fmt.Println(errMsg)
+		log.Fatal(errMsg)
 		os.Exit(1)
 	}
 }

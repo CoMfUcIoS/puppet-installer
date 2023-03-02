@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -18,9 +17,10 @@ func Install(args []string) {
 		if _, err := os.Stat(args[0]); errors.Is(err, os.ErrNotExist) {
 			log.Fatal("File does not exist")
 		} else {
-			fmt.Println("Installing Puppet with " + args[0] + "...")
+			log.Default().Print("Installing Puppet with " + args[0] + "...")
 			temp_folder := "/tmp/puppet-installer/config"
 			file_path := temp_folder + "/params.json"
+			os.Remove(file_path)
 			os.Mkdir(temp_folder, os.ModePerm)
 			source, _ := os.Open(args[0])
 			destination, _ := os.Create(file_path)
@@ -29,16 +29,22 @@ func Install(args []string) {
 			if err != nil {
 				log.Fatal(err)
 			}
-			out, err := exec.Command("docker", "run", "-v", file_path+":/params.json", "installer@latest").Output()
-			if err != nil {
-				log.Fatal(err)
+
+			cmd := exec.Command("docker", "run", "--rm", "-v", file_path+":/params.json", "installer")
+			stdout, _ := cmd.StdoutPipe()
+			cmd.Start()
+
+			buf := make([]byte, 128)
+			for {
+				_, err := stdout.Read(buf)
+				if err != nil {
+					break
+				}
+				log.Default().Print(string(buf))
 			}
-
-			fmt.Println("Command Successfully Executed", string(out))
-
 		}
 	} else {
-		log.Fatal("Please specify a inventory to install")
+		log.Fatal("Please specify params to install")
 	}
 
 }

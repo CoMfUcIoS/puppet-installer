@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"embed"
-	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	example: puppet-installer install puppetserver --version 6.4.0`,
 	Run: func(cmd *cobra.Command, args []string) {
 		CheckDependencies()
-		fmt.Println("Puppet by Perforce installer")
+		log.Default().Print("Puppet by Perforce installer")
 	},
 }
 

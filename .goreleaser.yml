@@ -1,0 +1,33 @@
+builds:
+    - binary: puppet-installer
+      goos:
+        - darwin
+        - linux
+      goarch:
+        - amd64
+        - arm64
+      env:
+        - CGO_ENABLED=0
+      flags:
+        - -mod=vendor
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: true
+
+# brews:
+#   -
+#     name: puppet-installer
+#     homepage: https://puppet.com/
+#     tap:
+#       owner: xxxxx
+#       name: xxxx
+      # commit_author:
+      #  name: team-nimbus
+      #  email: team-nimbus@@puppet.com
+
+checksum:
+  name_template: 'checksums.txt'
+
+

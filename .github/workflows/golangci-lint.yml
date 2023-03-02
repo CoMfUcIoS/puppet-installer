@@ -19,6 +19,10 @@ jobs:
         with:
           go-version: '1.18'
       - uses: actions/checkout@v3
+      - name: fetch vendor
+        run: go mod vendor
+      - name: go mod tidy
+        run: go mod tidy
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:

@@ -1,4 +1,4 @@
-module puppet-installer
+module github.com/comfucios/puppet-installer
 
 go 1.18
 

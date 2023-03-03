@@ -1,6 +1,6 @@
 package main
 
-import "puppet-installer/cmd"
+import "github.com/comfucios/puppet-installer/cmd"
 
 func main() {
 	cmd.Execute()

@@ -43,5 +43,8 @@ func httpServer() *fiber.App {
 
 	api.Get("/ping", controllers.Pong)
 
+	infra := api.Group("/infra")
+	infra.Post("/install", controllers.Infra)
+
 	return app
 }

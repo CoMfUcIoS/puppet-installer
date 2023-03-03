@@ -25,6 +25,7 @@ module.exports = (env, argv) => {
 
         output: {
             path: packageFolder,
+            ...(isDevelopment ? { sourceMapFilename: '[file].map' } : {}),
             filename: `assets/js/[name].min.js`,
         },
 
@@ -83,14 +84,12 @@ module.exports = (env, argv) => {
                                 }
                             },
                         },
-                      {
-                        loader: "resolve-url-loader",
-                      },
+                        { loader: "resolve-url-loader" },
                         {
                             // load sass files into css files
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: true,
+                                sourceMap: isDevelopment
                             }
                         },
                     ],

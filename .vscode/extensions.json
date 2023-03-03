@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "golang.go",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "mariusalchimavicius.json-to-ts",

@@ -5,13 +5,8 @@ build-frontend:
 		@echo "Building frontend..."
 		@cd ui && npm run build
 
-build: build-backend build-frontend
+build: build-frontend build-backend
 
-build-images:
-		@echo "Building images..."
-		@docker build -t backend:latest -f backend/Dockerfile .
-		@docker build -t frontend:latest -f frontend/Dockerfile .
-
-run:
-		@echo "Running..."
-		@docker-compose up
+build-image:
+		@echo "Building image..."
+		@docker build -t installer:latest -f backend/Dockerfile .

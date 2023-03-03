@@ -3,7 +3,7 @@ build-backend:
 		@cd backend && go build -o ../bin/puppet-installer
 build-frontend:
 		@echo "Building frontend..."
-		@cd frontend && npm run build
+		@cd ui && npm run build
 
 build: build-backend build-frontend
 

@@ -1,8 +1,10 @@
 builds:
-    - binary: puppet-installer
+    - binary: bin/puppet-installer
+      main: backend/
       goos:
         - darwin
         - linux
+
       goarch:
         - amd64
         - arm64

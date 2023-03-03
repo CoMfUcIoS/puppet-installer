@@ -7,7 +7,7 @@ const path = require("path"),
     ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'),
     HtmlWebPackPlugin = require('html-webpack-plugin')
 
-const packageFolder = path.resolve(__dirname, 'build')
+const packageFolder = path.resolve(__dirname, '../backend/packages/api/ui')
 const isDevelopment = process.env.NODE_ENV !== "production"
 
 module.exports = {

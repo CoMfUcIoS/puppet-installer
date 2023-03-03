@@ -83,6 +83,7 @@ module.exports = {
                             }
                         },
                     },
+                    { loader: "resolve-url-loader" },
                     {
                         // load sass files into css files
                         loader: 'sass-loader',
@@ -109,12 +110,8 @@ module.exports = {
                 },
             },
             {
-                test: /\.(ttf|eot|otf|woff)$/,
-                loader: 'file-loader',
-                options: {
-                    name: 'assets/fonts/[name].[ext]',
-                    esModule: false,
-                },
+                test: /\.(ttf|eot|otf|woff|woff2)$/,
+                use: [{ loader: "url-loader?limit=100000" }],
             },
             {
                 test: /\.(ico)$/,

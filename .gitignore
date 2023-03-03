@@ -1,3 +1,5 @@
 coverage
-vendor
-puppet-installer
+backend/vendor
+backend/puppet-installer
+ui/node_modules
+bin

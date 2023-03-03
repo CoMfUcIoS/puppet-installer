@@ -11,11 +11,17 @@ import { queryClient } from '@/lib/react-query';
 const ErrorFallback = () => {
   return (
     <div
-      className=""
+      className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
       role="alert"
     >
-      <h2 className="">Ooops, something went wrong :( </h2>
-      <div className="" onClick={() => window.location.assign(window.location.origin)}>
+      <h2 className="text-lg font-semibold">Ooops, something went wrong :( </h2>
+      <div
+        role="button"
+        tabIndex={0}
+        className="mt-4"
+        onKeyDown={() => window.location.assign(window.location.origin)}
+        onClick={() => window.location.assign(window.location.origin)}
+      >
         Refresh
       </div>
     </div>
@@ -30,9 +36,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <React.Suspense
       fallback={
-        <div className="flex items-center justify-center w-screen h-screen">
-          Loading....
-        </div>
+        <div className="flex items-center justify-center w-screen h-screen">Loading....</div>
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -41,8 +45,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
             <Notifications />
 
-              <Router>{children}</Router>
-
+            <Router>{children}</Router>
           </QueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>

@@ -1,6 +1,4 @@
-
 export const Landing = () => {
-
   return (
     <>
       <div className="bg-white h-[100vh] flex items-center">

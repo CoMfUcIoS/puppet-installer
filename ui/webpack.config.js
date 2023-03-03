@@ -5,7 +5,8 @@ const path = require("path"),
     CssMinimizerPlugin = require("css-minimizer-webpack-plugin"),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'),
-    HtmlWebPackPlugin = require('html-webpack-plugin')
+    HtmlWebPackPlugin = require('html-webpack-plugin'),
+    CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 
 const packageFolder = path.resolve(__dirname, '../backend/packages/api/ui')
 
@@ -37,7 +38,7 @@ module.exports = (env, argv) => {
         },
 
         module: {
-            rules: [
+          rules: [
                 {
                     test: /\.(t|j)sx?$/,
                     exclude: /node_modules/,
@@ -71,20 +72,24 @@ module.exports = (env, argv) => {
                                 importLoaders: 2, // 2 other loaders used first, postcss-loader and sass-loader
                                 sourceMap: isDevelopment,
                             }
-                        },
+                      },
                         {
                             loader: "postcss-loader",
-                            options: {
+                          options: {
                                 sourceMap: isDevelopment,
                                 postcssOptions: {
+                                  processCssUrls: false,
                                     plugins: [
                                         require("tailwindcss"),
                                     ]
                                 }
                             },
-                        },
-                      {
+                      },
+                        {
                         loader: "resolve-url-loader",
+                        options: {
+                          sourceMap: isDevelopment,
+                        },
                       },
                         {
                             // load sass files into css files
@@ -92,8 +97,13 @@ module.exports = (env, argv) => {
                             options: {
                                 sourceMap: true,
                             }
-                        },
+                      },
+
                     ],
+            },
+                {
+                    test: /\.(ttf|eot|otf|woff|woff2)$/,
+                    use: [{ loader: "url-loader?limit=100000" }],
                 },
                 {
                     test: /\.html$/i,
@@ -112,10 +122,6 @@ module.exports = (env, argv) => {
                     },
                 },
                 {
-                    test: /\.(ttf|eot|otf|woff|woff2)$/,
-                    use: [{ loader: "url-loader?limit=100000" }],
-                },
-                {
                     test: /\.(ico)$/,
                     loader: 'file-loader',
                     options: {
@@ -126,7 +132,8 @@ module.exports = (env, argv) => {
             ],
         },
 
-        plugins: [
+      plugins: [
+            new CleanWebpackPlugin(),
             new webpack.ProvidePlugin({
                 React: "react",
             }),
@@ -206,7 +213,10 @@ module.exports = (env, argv) => {
             host: '0.0.0.0',
             compress: true,
             allowedHosts: 'all',
-            hot: true
+            hot: true,
+            proxy: {
+              '/api': 'http://localhost:3003',
+            },
         },
 
         performance: {

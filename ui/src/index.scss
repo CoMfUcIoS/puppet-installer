@@ -1,1 +1,61 @@
+// 'component styles'
+@import '~@puppet/react-components/source/scss/library/ui';
+// PDS styles
 @import '~@puppet/sass-variables/index';
+
+
+.app-view {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 0px;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "sidebar content";
+
+  .app-sidebar {
+    grid-area: sidebar;
+    height: 100%;
+
+    &.sidebar-v2 {
+      .rc-sidebar-label {
+        padding: 0px;
+      }
+    }
+  }
+
+  .rc-loading {
+    height: 40px;
+  }
+
+  .app-content {
+    grid-area: content;
+    overflow-y: auto;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: -10px;
+  }
+
+  .sources-selection__disable {
+    pointer-events: none;
+  }
+
+  .rc-alert {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+
+  .no-margins {
+    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+  }
+
+  .global-font-italic {
+    font-style: italic;
+  }
+}

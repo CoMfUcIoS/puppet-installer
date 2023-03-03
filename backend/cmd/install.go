@@ -34,7 +34,7 @@ func Install(args []string) {
 			stdout, _ := cmd.StdoutPipe()
 			cmd.Start()
 
-			buf := make([]byte, 128)
+			buf := make([]byte, 256)
 			for {
 				_, err := stdout.Read(buf)
 				if err != nil {

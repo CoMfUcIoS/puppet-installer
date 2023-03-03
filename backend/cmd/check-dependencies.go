@@ -4,7 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/comfucios/puppet-installer/backend/packages/utils"
+	"puppet-installer/backend/packages/utils"
+
 	"github.com/spf13/cobra"
 )
 
